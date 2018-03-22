@@ -204,9 +204,9 @@ on boot
     chown system system /sys/class/leds/green/brightness
     chown system system /sys/class/leds/blue/brightness
 
-    # Oxygen LED
     chown system system /sys/class/leds/white/blink
     chown system system /sys/class/leds/white/brightness
+    chown system system /sys/class/leds/white/led_time
 
     # Allow access to emmc rawdump block partition and dload sysfs node
     chown root system /dev/block/bootdevice/by-name/rawdump -p /dev/block/
@@ -647,10 +647,12 @@ service fingerprintd /system/bin/fingerprintd
     group system sdcard_rw
     system system
     writepid /dev/cpuset/system-background/tasks
-    disabled
 
 on property:vold.decrypt=trigger_restart_min_framework
     start time_daemon
 
 on property:vold.decrypt=trigger_restart_framework
     restart time_daemon
+
+on property:dev.bootcomplete=1
+    setprop sys.io.scheduler "bfq"

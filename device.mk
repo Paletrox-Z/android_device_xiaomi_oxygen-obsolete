@@ -179,7 +179,6 @@ PRODUCT_COPY_FILES += \
 
 # Lights
 PRODUCT_PACKAGES += \
-    lights.qcom \
     lights.msm8953
 
 # Media 

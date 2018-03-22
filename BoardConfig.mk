@@ -46,7 +46,6 @@ BOARD_KERNEL_PAGESIZE :=  2048
 BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x01000000 --tags_offset 0x00000100
 TARGET_KERNEL_CONFIG := lineageos_oxygen_defconfig
 TARGET_KERNEL_SOURCE := kernel/xiaomi/oxygen
-TARGET_PREBUILT_KERNEL := $(DEVICE_PATH)/kernel
 
 # ANT
 BOARD_ANT_WIRELESS_DEVICE := "vfs-prerelease"
@@ -212,6 +211,11 @@ USE_SENSOR_MULTI_HAL := true
 # SELinux
 include device/qcom/sepolicy/sepolicy.mk
 BOARD_SEPOLICY_DIRS += $(DEVICE_PATH)/sepolicy
+
+# TWRP
+ifeq ($(WITH_TWRP),true)
+include $(DEVICE_PATH)/twrp.mk
+endif
 
 # Wi-Fi
 BOARD_HAS_QCOM_WLAN := true

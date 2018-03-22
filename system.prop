@@ -54,8 +54,8 @@ persist.camera.imglib.cac3=2
 camera.lowpower.record.enable=1
 persist.camera.gyro.disable=0
 camera.hal1.packagelist=com.skype.raider,com.google.android.talk
-persist.camera.eis.enable=1
 persist.camera.HAL3.enabled=1
+persist.camera.eis.enable=1
 persist.camera.is_mode=4
 
 # Cne/Dpm
@@ -99,6 +99,15 @@ ro.fm.transmitter=false
 # Frp
 ro.frp.pst=/dev/block/bootdevice/by-name/config
 
+# Game Mode
+persist.sys.NV_FPSLIMIT=60
+persist.sys.NV_POWERMODE=1
+persist.sys.NV_PROFVER=15
+persist.sys.NV_STEREOCTRL=0
+persist.sys.NV_STEREOSEPCHG=0
+persist.sys.NV_STEREOSEP=20
+persist.sys.purgeable_assets=1
+
 # GPS
 persist.gps.qc_nlp_in_use=1
 persist.loc.nlp_name=com.qualcomm.location
@@ -118,6 +127,16 @@ vidc.dec.downscalar_width=1920
 vidc.dec.downscalar_height=1088
 vidc.disable.split.mode=1
 vidc.enc.disable.pq=true
+
+# Misc Tweaks
+ro.config.hw_fast_dormancy=1
+ro.config.hw_quickpoweron=true
+ro.config.hw_power_saving=true
+touch.pressure.scale=0.001
+
+
+# Multiwindow for all - Experimental
+persist.splitwindow.support_all=true
 
 # Perf
 ro.vendor.extension_library=libqti-perfd-client.so
@@ -174,6 +193,12 @@ telephony.lteOnCdmaDevice=1
 # SdcardFs
 ro.sys.sdcardfs=true
 
+# Sensor Sleep Control
+ro.ril.sensor.sleep.control=1
+
+# Signal
+persist.cust.tel.eons=1
+
 # Time Services
 persist.timed.enable=true
 
@@ -187,5 +212,9 @@ ro.sys.fw.trim_empty_percent=100
 ro.sys.fw.trim_cache_percent=100
 ro.sys.fw.trim_enable_memory=2147483648
 
+# Voice Call Steps
+ro.config.vc_call_steps=10
+
 # Wifi
 wifi.interface=wlan0
+wifi.supplicant_scan_interval=100
