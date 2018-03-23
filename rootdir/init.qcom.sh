@@ -33,6 +33,12 @@ else
     platformid=`cat /sys/devices/system/soc/soc0/id`
 fi
 
+# DT2W
+mkdir -p /sys/bus/i2c/devices/3-0038/
+touch /sys/bus/i2c/devices/3-0038/wakeup_mode
+echo "1" > /sys/bus/i2c/devices/3-0038/wakeup_mode
+chown -h root.system /sys/bus/i2c/devices/3-0038/wakeup_mode
+
 start_battery_monitor()
 {
 	if ls /sys/bus/spmi/devices/qpnp-bms-*/fcc_data ; then

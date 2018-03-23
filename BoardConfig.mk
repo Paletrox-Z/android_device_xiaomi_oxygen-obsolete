@@ -114,7 +114,9 @@ BOARD_USES_CYANOGEN_HARDWARE := true
 BOARD_HARDWARE_CLASS += \
     hardware/cyanogen/cmhw \
     $(DEVICE_PATH)/cmhw
-TARGET_TAP_TO_WAKE_NODE := "/proc/touchpanel/enable_dt2w"
+
+# DT2W
+TARGET_TAP_TO_WAKE_NODE := "/sys/bus/i2c/devices/3-0038/wakeup_mode"
 
 # CNE / DPM
 BOARD_USES_QCNE := true
