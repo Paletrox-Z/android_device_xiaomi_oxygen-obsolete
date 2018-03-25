@@ -46,7 +46,7 @@ static struct light_state_t g_notification;
 static struct light_state_t g_battery;
 static int g_last_backlight_mode = BRIGHTNESS_MODE_USER;
 
-#define BUTTON_BRIGHTNESS_FILE "/sys/class/leds/button-backlight/brightness"
+#define BRIGHTNESS_FILE "/sys/class/leds/button-backlight/brightness"
 #define BUTTON_MAX_BRIGHTNESS_FILE "/sys/class/leds/button-backlight/max_brightness"
 
 enum buttons_mask_t {
@@ -77,8 +77,6 @@ char const*const PERSISTENCE_FILE
 
 #define RAMP_SIZE 8
 static int BRIGHTNESS_RAMP[RAMP_SIZE] = { 0, 12, 25, 37, 50, 72, 85, 100 };
-
-unsigned int brightness;
 #define RAMP_STEP_DURATION 50
 
 #define DEFAULT_MAX_BRIGHTNESS 255
@@ -90,7 +88,7 @@ int max_brightness;
 
 void check_buttons_support()
 {
-    // Assume that the device has at least one button
+    // Assume that the device has at least two buttons
     hw_buttons = BUTTON;
 }
 
@@ -191,7 +189,7 @@ static int set_light_backlight(struct light_device_t* dev,
         struct light_state_t const* state)
 {
     int err = 0;
-    brightness = rgb_to_brightness(state);
+    int brightness = rgb_to_brightness(state);
     unsigned int lpEnabled =
         state->brightnessMode == BRIGHTNESS_MODE_LOW_PERSISTENCE;
 
@@ -234,23 +232,21 @@ static int set_light_buttons(struct light_device_t *dev,
         const struct light_state_t *state)
 {
     int err = 0;
-    int old_brightness = brightness;
-    brightness = brightness * max_brightness / DEFAULT_MAX_BRIGHTNESS;
-    //brightness = rgb_to_brightness(state);
+    int brightness = rgb_to_brightness(state);
 
     if (!dev)
         return -1;
 
     pthread_mutex_lock(&g_lock);
 
-    if (hw_buttons & BUTTON)
-        err += write_int(BUTTON_BRIGHTNESS_FILE, brightness);
+//    if (hw_buttons & BUTTON_1)
+    err += write_int(BUTTON_BRIGHTNESS_FILE, brightness);
 
     pthread_mutex_unlock(&g_lock);
     return err;
 }
 
-static char* get_scaled_duty_pcts(int brightness_in)
+static char* get_scaled_duty_pcts(int brightness)
 {
     char *buf = malloc(5 * RAMP_SIZE * sizeof(char));
     char *pad = "";
@@ -260,11 +256,11 @@ static char* get_scaled_duty_pcts(int brightness_in)
 
     for (i = 0; i < RAMP_SIZE; i++) {
         char temp[5] = "";
-        snprintf(temp, sizeof(temp), "%s%d", pad, (BRIGHTNESS_RAMP[i] * brightness_in / 255));
+        snprintf(temp, sizeof(temp), "%s%d", pad, (BRIGHTNESS_RAMP[i] * brightness / 255));
         strcat(buf, temp);
         pad = ",";
     }
-    ALOGV("%s: brightness=%d, duty=%s\n", __func__, brightness_in, buf);
+    ALOGV("%s: brightness=%d, duty=%s\n", __func__, brightness, buf);
     return buf;
 }
 
@@ -354,7 +350,7 @@ static int set_light_notifications(struct light_device_t* dev,
 {
     pthread_mutex_lock(&g_lock);
 
-    //unsigned int brightness;
+    unsigned int brightness;
     unsigned int color;
     unsigned int rgb[3];
 
@@ -473,4 +469,3 @@ struct hw_module_t HAL_MODULE_INFO_SYM = {
     .author = "The CyanogenMod Project",
     .methods = &lights_module_methods,
 };
-
