@@ -46,7 +46,7 @@ static struct light_state_t g_notification;
 static struct light_state_t g_battery;
 static int g_last_backlight_mode = BRIGHTNESS_MODE_USER;
 
-#define BRIGHTNESS_FILE "/sys/class/leds/button-backlight/brightness"
+#define BUTTON_BRIGHTNESS_FILE "/sys/class/leds/button-backlight/brightness"
 #define BUTTON_MAX_BRIGHTNESS_FILE "/sys/class/leds/button-backlight/max_brightness"
 
 enum buttons_mask_t {
