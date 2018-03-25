@@ -222,6 +222,7 @@ static int set_light_backlight(struct light_device_t* dev,
 
     if (!err) {
         err = write_int(LCD_BRIGHTNESS_FILE, brightness);
+	err += write_int(BUTTON_BRIGHTNESS_FILE, brightness);
     }
 
     pthread_mutex_unlock(&g_lock);
@@ -239,8 +240,9 @@ static int set_light_buttons(struct light_device_t *dev,
 
     pthread_mutex_lock(&g_lock);
 
-//    if (hw_buttons & BUTTON_1)
-    err += write_int(BUTTON_BRIGHTNESS_FILE, brightness);
+// Writing button light state to file by default.
+//    if (hw_buttons & BUTTON)
+//    err += write_int(BUTTON_BRIGHTNESS_FILE, brightness);
 
     pthread_mutex_unlock(&g_lock);
     return err;

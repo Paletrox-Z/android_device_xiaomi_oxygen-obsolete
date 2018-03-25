@@ -267,8 +267,8 @@
     <ctl name="IIR1 Enable Band4" value="0" />
     <ctl name="IIR1 Enable Band5" value="0" />
     <!-- IIR -->
-    <ctl name="TAS2560 Receiver DAC Volume" value="15db" />
-    <ctl name="TAS2560 Speaker DAC Volume" value="15db" />
+    <ctl name="TAS2560 Receiver DAC Volume" value="1db" />
+    <ctl name="TAS2560 Speaker DAC Volume" value="1db" />
     <!-- ADSP testfwk -->
     <ctl name="MI2S_DL_HL Switch" value="0" />
     <!-- ADSP testfwk end-->
