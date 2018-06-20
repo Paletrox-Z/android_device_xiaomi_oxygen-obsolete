@@ -16,10 +16,10 @@
 
 $(call inherit-product, device/xiaomi/oxygen/full_oxygen.mk)
 
-# Inherit some common AOKP stuff.
-$(call inherit-product, vendor/aokp/configs/common_full_phone.mk)
+# Inherit some common FH stuff.
+$(call inherit-product, vendor/fh/config/common_full_phone.mk)
 
-PRODUCT_NAME := aokp_oxygen
+PRODUCT_NAME := fh_oxygen
 BOARD_VENDOR := Xiaomi
 
 PRODUCT_GMS_CLIENTID_BASE := android-xiaomi
