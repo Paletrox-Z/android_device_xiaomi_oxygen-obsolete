@@ -86,6 +86,7 @@ PRODUCT_PACKAGES += \
     android.hardware.audio.effect@2.0-service \
     android.hardware.soundtrigger@2.0-impl \
     android.hardware.soundtrigger@2.0-service \
+    audio.primary.msm8953 \
     audio.a2dp.default \
     audio.r_submix.default \
     audio.usb.default \
@@ -105,11 +106,6 @@ PRODUCT_COPY_FILES += \
 	$(DEVICE_PATH)/audio/aanc_tuning_mixer.txt:$(TARGET_COPY_OUT_VENDOR)/etc/aanc_tuning_mixer.txt \
         $(DEVICE_PATH)/audio/audio_platform_info.xml:$(TARGET_COPY_OUT_VENDOR)/etc/audio_platform_info.xml \
         $(DEVICE_PATH)/audio/mixer_paths_mtp.xml:$(TARGET_COPY_OUT_VENDOR)/etc/mixer_paths_mtp.xml
-        
-# Audio HAL - Prebuilt (Test)
-PRODUCT_COPY_FILES += \
-	$(VENDOR_PATH)/proprietary/vendor/lib/hw/audio.primary.msm8953.so:$(TARGET_COPY_OUT_VENDOR)/lib/hw/audio.primary.msm8953.so \
-	$(VENDOR_PATH)/proprietary/vendor/lib64/hw/audio.primary.msm8953.so:$(TARGET_COPY_OUT_VENDOR)/lib64/hw/audio.primary.msm8953.so
 
 # XML Audio configuration files
 PRODUCT_COPY_FILES += \
